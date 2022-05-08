@@ -44,4 +44,20 @@ public class ReviewRepositoryTests {
             System.out.println("---------------------------------");
         });
     }
+    @Test
+    public void insertMovieReviewsInto101(){ //101번 영화에 4개의 리뷰를 넣는다.
+        IntStream.rangeClosed(1,4).forEach(i->{
+            Long mno=101L; // 영화정보
+            Long mid=100L; // review하는 사람 정보
+            Member member=Member.builder().mid(mid).build();
+
+            Review movieReview= Review.builder()
+                    .member(member)
+                    .movie(Movie.builder().mno(mno).build())
+                    .grade((int)(Math.random()*5)+1)
+                    .text("AI닥터..."+i)
+                    .build();
+            reviewRepository.save(movieReview);
+        });
+    }
 }
